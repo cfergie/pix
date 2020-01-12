@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FoundationUtils",
+        "repositoryURL": "https://github.com/cfergie/foundation-utils.git",
+        "state": {
+          "branch": "master",
+          "revision": "70b77d79fb97111c84149cd4f766cdadefb75912",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftUIComponents",
+        "repositoryURL": "https://github.com/cfergie/swiftui-components.git",
+        "state": {
+          "branch": "master",
+          "revision": "ce38f6610be1f50f8f30a299697f52de9b6f55ed",
+          "version": null
+        }
+      },
+      {
+        "package": "UIColor_Hex_Swift",
+        "repositoryURL": "https://github.com/yeahdongcn/UIColor-Hex-Swift.git",
+        "state": {
+          "branch": null,
+          "revision": "7043811d77df477bf0df3e3bc4269cbd44b3f1a4",
+          "version": "5.1.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
