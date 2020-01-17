@@ -1,11 +1,13 @@
 import SwiftUI
 import struct SwiftUIComponents.ScrollView
+import class UIKit.UIScrollView
 
 struct PictureList: View {
 
     @ObservedObject private var viewModel: PictureListViewModel = PictureListViewModel()
     @State private var searchText: String = ""
     @State private var offset: CGFloat = 0
+    @State private var contentSize: CGSize = .zero
 
     var body: some View {
         VStack {
@@ -36,16 +38,20 @@ struct PictureList: View {
                     case .success(let photos):
                         return AnyView(
                             VStack {
-                                Text("OFFSET: \(self.offset)").background(Color.pink)
+                                Text("HEIGHT: \(self.contentSize.height) OFFSET: \(self.offset)").background(Color.pink).onAppear {
+                                    print("APPEAR")
+                                }
                                 ScrollView(contentOffset: self.$offset) {
-                                    VStack(alignment: .center, spacing: 0) {
-                                        ForEach(photos, id: \.id) { photo in
-                                            Picture(photo: photo)
-                                                .frame(
-                                                    width: geometry.size.width,
-                                                    height: geometry.size.width / photo.aspectRatio,
-                                                    alignment: .center
-                                            )
+                                    Measure(contentSize: self.$contentSize) {
+                                        VStack(alignment: .center, spacing: 0) {
+                                            ForEach(photos, id: \.id) { photo in
+                                                Picture(photo: photo)
+                                                    .frame(
+                                                        width: geometry.size.width,
+                                                        height: geometry.size.width / photo.aspectRatio,
+                                                        alignment: .center
+                                                )
+                                            }
                                         }
                                     }
                                 }

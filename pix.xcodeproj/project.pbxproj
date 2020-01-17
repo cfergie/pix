@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B11DCDC23D18F2A003EB646 /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B11DCDB23D18F2A003EB646 /* Measure.swift */; };
 		4B1FA9B92360E3D700B96CBC /* FoundationUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 4B1FA9B82360E3D700B96CBC /* FoundationUtils */; };
 		4B1FA9BB2360F1ED00B96CBC /* URLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1FA9BA2360F1ED00B96CBC /* URLImage.swift */; };
 		4B1FA9BD2364C09600B96CBC /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1FA9BC2364C09600B96CBC /* URLSession+Extension.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B11DCDB23D18F2A003EB646 /* Measure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
 		4B1FA9BA2360F1ED00B96CBC /* URLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImage.swift; sourceTree = "<group>"; };
 		4B1FA9BC2364C09600B96CBC /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 		4B1FA9BE2364C7C400B96CBC /* Numeric+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Extension.swift"; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				4B988411235F989A00E6D3E0 /* PictureList.swift */,
+				4B11DCDB23D18F2A003EB646 /* Measure.swift */,
 				4B1FA9C82365C02E00B96CBC /* Picture.swift */,
 				4B1FA9BA2360F1ED00B96CBC /* URLImage.swift */,
 				4B988401235EDCC500E6D3E0 /* RootView.swift */,
@@ -252,6 +255,7 @@
 			files = (
 				4B2DDA3223CB418100D26EC4 /* PhotoService.swift in Sources */,
 				4B2DDA2923CB0B8E00D26EC4 /* NetworkingService+Extension.swift in Sources */,
+				4B11DCDC23D18F2A003EB646 /* Measure.swift in Sources */,
 				4B1FA9C92365C02E00B96CBC /* Picture.swift in Sources */,
 				4B98841A235F9F2200E6D3E0 /* Photo.swift in Sources */,
 				4B2DDA3023CB3FA400D26EC4 /* Keys.swift in Sources */,
