@@ -1,7 +1,13 @@
 import Foundation
 
 protocol PhotoService: class {
-    func search(for text: String, withCompletion completion: @escaping (Result<[Photo], Swift.Error>) -> Void)
+    func search(for text: String, page: Int, withCompletion completion: @escaping (Result<[Photo], Swift.Error>) -> Void)
+}
+
+extension PhotoService {
+    func search(for text: String, withCompletion completion: @escaping (Result<[Photo], Swift.Error>) -> Void) {
+        self.search(for: text, page: 1, withCompletion: completion)
+    }
 }
 
 final class Unsplash: PhotoService {
@@ -17,14 +23,14 @@ final class Unsplash: PhotoService {
         self.networkingService = networkingService
     }
 
-    func search(for text: String, withCompletion completion: @escaping (Result<[Photo], Swift.Error>) -> Void) {
+    func search(for text: String, page: Int, withCompletion completion: @escaping (Result<[Photo], Swift.Error>) -> Void) {
         do {
             let urlString = "https://api.unsplash.com/search/photos"
             guard var urlComponents = URLComponents(string: urlString) else {
                 throw Error.invalidURLComponents(urlString)
             }
             urlComponents.queryItems = [
-                URLQueryItem(name: "page", value: "1"),
+                URLQueryItem(name: "page", value: String(page)),
                 URLQueryItem(name: "query", value: text),
                 URLQueryItem(name: "client_id", value: unsplashKey)
             ]

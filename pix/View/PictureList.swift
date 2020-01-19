@@ -28,35 +28,35 @@ struct PictureList: View {
                                 self.viewModel.search(for: "disco")
                         }
                     )
-                case .loading:
-                    return AnyView(
-                        Text("LOADING")
-                            .background(Color.green)
-                    )
+                case .loading(let partialResult):
+                    switch partialResult {
+                    case .none:
+                        return AnyView(Text("LOADING. NO DATA").background(Color.purple))
+                    case .some(let result):
+                        switch result {
+                        case .failure:
+                            return AnyView(Text("LOADING. PREVIOUS DATA FAILED").background(Color.red))
+                        case .success(let partial):
+                            return AnyView(
+                                VStack {
+                                    Text("LOADING.... ! HEIGHT: \(self.contentSize.height) OFFSET: \(self.offset)").background(Color.green)
+                                    List(photos: partial, itemWidth: geometry.size.width, offset: self.$offset, contentSize: self.$contentSize)
+                                }
+
+                            )
+                        }
+                    }
                 case .loaded(let result):
                     switch result {
                     case .success(let photos):
                         return AnyView(
                             VStack {
-                                Text("HEIGHT: \(self.contentSize.height) OFFSET: \(self.offset)").background(Color.pink).onAppear {
-                                    print("APPEAR")
+                                Text("LOADED! HEIGHT: \(self.contentSize.height) OFFSET: \(self.offset). VIEW HEIGHT: \(geometry.size.height)").background(Color.pink)
+                                Fetch(offset: self.offset, height: self.contentSize.height) {
+                                    self.viewModel.fetchMore()
                                 }
-                                ScrollView(contentOffset: self.$offset) {
-                                    Measure(contentSize: self.$contentSize) {
-                                        VStack(alignment: .center, spacing: 0) {
-                                            ForEach(photos, id: \.id) { photo in
-                                                Picture(photo: photo)
-                                                    .frame(
-                                                        width: geometry.size.width,
-                                                        height: geometry.size.width / photo.aspectRatio,
-                                                        alignment: .center
-                                                )
-                                            }
-                                        }
-                                    }
-                                }
+                                List(photos: photos, itemWidth: geometry.size.width, offset: self.$offset, contentSize: self.$contentSize)
                             }
-
                         )
                     case .failure(let error):
                         return AnyView(
@@ -67,5 +67,42 @@ struct PictureList: View {
                 }
             }
         }
+    }
+}
+
+struct List: View {
+    let photos: [Photo]
+    let itemWidth: CGFloat
+    @Binding var offset: CGFloat
+    @Binding var contentSize: CGSize
+
+    var body: some View {
+        ScrollView(contentOffset: self.$offset) {
+            Measure(contentSize: self.$contentSize) {
+                VStack(alignment: .center, spacing: 0) {
+                    ForEach(self.photos, id: \.id) { photo in
+                        Picture(photo: photo)
+                            .frame(
+                                width: self.itemWidth,
+                                height: self.itemWidth / photo.aspectRatio,
+                                alignment: .center
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct Fetch: View {
+
+    init(offset: CGFloat, height: CGFloat, fetchMore: () -> Void) {
+        if abs(offset) / height > 0.7 {
+            fetchMore()
+        }
+    }
+
+    var body: some View {
+        return EmptyView()
     }
 }
